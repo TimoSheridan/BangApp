@@ -6,18 +6,40 @@ var logger = require('morgan');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
-var mongoose = require('mongoose');
+
+// const MongoClient = require(‘mongodb’).MongoClient;
+// const uri = "mongodb://" + process.env.CLOUD_ATLAS_USER + ":" + process.env.CLOUD_ATLAS_PW + "@bangapp-shard-00-00-yh6bx.mongodb.net:27017,bangapp-shard-00-01-yh6bx.mongodb.net:27017,bangapp-shard-00-02-yh6bx.mongodb.net:27017/test?ssl=true&replicaSet=BangApp-shard-0&authSource=admin&retryWrites=true"
+
+// const uri = "mongodb+srv://" + process.env.CLOUD_ATLAS_USER + ":" + process.env.CLOUD_ATLAS_PW + "@bangapp-yh6bx.mongodb.net/test?retryWrites=true?authSource=admin";
 
 
-const MongoClient = require('mongodb').MongoClient;
-const uri = "mongodb+srv://" + process.env.CLOUD_ATLAS_USER + ":" + process.env.CLOUD_ATLAS_PW + "<password>@bangapp-yh6bx.mongodb.net/test?retryWrites=true";
-const client = new MongoClient(uri, { useNewUrlParser: true });
-client.connect(err => {
-  console.log("connect?");
-  const collection = client.db("test").collection("devices");
+var MongoClient = require('mongodb').MongoClient;
+
+var options = {
+  server: { socketOptions: { keepAlive: 1, connectTimeoutMS: 30000 } },
+  replset: { socketOptions: { keepAlive: 1, connectTimeoutMS: 30000 } }
+};
+
+var uri = "mongodb://bangUser:bang@cluster0-shard-00-00-yh6bx.mongodb.net:27017,cluster0-shard-00-01-yh6bx.mongodb.net:27017,cluster0-shard-00-02-yh6bx.mongodb.net:27017/test?ssl=true&replicaSet=Cluster0-shard-0&authSource=admin&retryWrites=true";
+MongoClient.connect(uri, options, function(err, client) {
+  console.log(err);
+  console.log(client);
+  const db  = client.db("Hello");
+  db.createCollection("Hi there", {});
+  // const collection = client.db("test").collection("devices");
   // perform actions on the collection object
-  client.close();
+  // client.close();
 });
+
+
+
+
+// const uri = "mongodb://" + process.env.CLOUD_ATLAS_USER + ":" + process.env.CLOUD_ATLAS_PW + "@bangapp-shard-00-00-yh6bx.mongodb.net:27017,bangapp-shard-00-01-yh6bx.mongodb.net:27017,bangapp-shard-00-02-yh6bx.mongodb.net:27017/test?ssl=true&replicaSet=BangApp-shard-0&authSource=admin&retryWrites=true"
+
+//const uri = "mongodb+srv://" + process.env.CLOUD_ATLAS_USER + ":" + process.env.CLOUD_ATLAS_PW + "@bangapp-yh6bx.mongodb.net/test?retryWrites=true";
+// const database_name = "BangApp";
+// const client = new MongoClient(uri, { useNewUrlParser: true });
+
 
 
 var app = express();
@@ -51,6 +73,22 @@ app.use(function(err, req, res, next) {
   res.render('error');
 });
 
+/* MongoClient.connect(uri, { useNewUrlParser: true }, (error, client) => {
+    if(error) {
+      console.log(error);
+    }
+    database = client.db(DATABASE_NAME);
+    collection = database.collection("people");
+    console.log("Connected to `" + DATABASE_NAME + "`!");
+}); */
+
+// mongoose.connect(uri, {dbName: 'BangApp'});
+
+
+/* db.on('error', console.error.bind(console, 'MongoDB connection error:'));
+db.once('open', function (callback) {
+  console.log("db up");
+}); */
 
 
 module.exports = app;
