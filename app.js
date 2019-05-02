@@ -17,6 +17,9 @@ var app = express();
 
 const client = require('twilio')(process.env.TWILIO_SID, process.env.TWILIO_TOKEN);
 
+let User = require('./models/User');
+let Duel = require('./models/Duel');
+
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -58,5 +61,31 @@ db.on('error', console.error.bind(console, 'MongoDB connection error:'));
 db.once('open', function (callback) {
   console.log("db up");
 });
+
+setInterval(function() {
+  Duel.find({ state: 'accepted', drawTime: { $lte: Date.now() }})
+  .populate('users')
+  .exec(function(err, duels) {
+    if (err) {
+      console.log(err)
+    } else {
+      for (let duel of duels) {
+        for (let user of duel.users) {
+          client.messages.create({
+            body: "DRAW! Respond BANG to shoot!",
+            to: user.number,  // Text this number
+            from: '+18304444565' // From a valid Twilio number
+          })
+        }
+        duel.state = 'drawn';
+        duel.save(function(err, newDuel) {
+          if (err) {
+            console.log(err);
+          }
+        });
+      }
+    }
+  })
+}, 5 * 1000);
 
 module.exports = app;
