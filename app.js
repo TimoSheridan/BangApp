@@ -10,9 +10,12 @@ let mongoose = require('mongoose');
 const uri = "mongodb+srv://" + process.env.CLOUD_ATLAS_USER + ":" + process.env.CLOUD_ATLAS_PW + "@cluster0-yh6bx.mongodb.net/" + process.env.CLOUD_ATLAS_DB + "?retryWrites=true";
 let db = mongoose.connection;
 
+var duelRouter = require('./routes/duel');
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
-var smsRouter = require('./routes/sms');
+var smsRouter = require('./routes/sms/sms');
+var bangRouter = require('./routes/sms/bang');
+var statusRouter = require('./routes/sms/status');
 var app = express();
 
 const client = require('twilio')(process.env.TWILIO_SID, process.env.TWILIO_TOKEN);
@@ -34,6 +37,9 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/sms', smsRouter);
+app.use('/duels', duelRouter);
+app.use('/sms/bang', bangRouter);
+app.use('/sms/status', statusRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
