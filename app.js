@@ -7,7 +7,8 @@ require('dotenv-extended').load();
 
 let mongoose = require('mongoose');
 
-const uri = "mongodb+srv://" + process.env.CLOUD_ATLAS_USER + ":" + process.env.CLOUD_ATLAS_PW + "@cluster0-yh6bx.mongodb.net/" + process.env.CLOUD_ATLAS_DB + "?retryWrites=true";
+const uri = "mongodb+srv://" + process.env.CLOUD_ATLAS_USER + ":" + process.env.CLOUD_ATLAS_PW + "@" + process.env.CLOUD_ATLAS_CLUSTER + "-yh6bx.mongodb.net/" + process.env.CLOUD_ATLAS_DB + "?retryWrites=true";
+// const uri = "mongodb+srv://" + process.env.CLOUD_ATLAS_USER + ":" + process.env.CLOUD_ATLAS_PW + "@cluster0-yh6bx.mongodb.net/" + process.env.CLOUD_ATLAS_DB + "?retryWrites=true";
 let db = mongoose.connection;
 
 var duelRouter = require('./routes/duel');
