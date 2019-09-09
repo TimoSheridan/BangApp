@@ -86,7 +86,7 @@ setInterval(function() {
         duel.state = 'drawn';
         duel.save(function(err, newDuel) {
           if (err) {
-            console.log(err);
+            // console.log(err);
           }
         });
       }

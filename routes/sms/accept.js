@@ -48,10 +48,10 @@ router.post('/', function(req, res, next) {
     } else {
       var counter = 0;
       for (let user of newDuel.users) {
-        console.log("in for loop");
+        // console.log("in for loop");
         User.findById(user, function(err, user) {
           if (err) {
-            console.log(err);
+            // console.log(err);
           } else {
             client.messages.create({
               body: "The DUEL is on! At some point in the next hour, you will receive a message telling you to DRAW. The first to repond with BANG will be the winner!",
@@ -59,7 +59,7 @@ router.post('/', function(req, res, next) {
               from: '+18304444565' // From a valid Twilio number
             })
             .then(function(message) {
-              console.log("message sent to " + message.to)
+              // console.log("message sent to " + message.to)
             });
           }
           counter++;

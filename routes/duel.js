@@ -30,7 +30,7 @@ router.get('/getDuelsByUsersAndState', function(req, res, next) {
 
 });
 
-router.post('/createRandomDuels', function(req, res, next) {
+/* router.post('/createRandomDuels', function(req, res, next) {
   for (i = 0; i < 50; i++) {
     duel = new Duel();
     duel.users = ['5ccca2ed82834100177f1cdc', '5ccca2ed82834100177f1cdc'];
@@ -43,11 +43,11 @@ router.post('/createRandomDuels', function(req, res, next) {
     }
     duel.save(function(err, duel) {
       if (err) {
-        console.log(err);
+        // console.log(err);
       }
     })
   }
   res.status(200).send("success");
-});
+}); */
 
 module.exports = router;

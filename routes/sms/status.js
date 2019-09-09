@@ -7,12 +7,12 @@ const MessagingResponse = require('twilio').twiml.MessagingResponse;
 router.post('/', function(req, res, next) {
   const twiml = new MessagingResponse();
 
-  console.log("in status");
+  // console.log("in status");
 
   User.findOne({ number: req.body.From }, handleStatusLookup);
 
   function handleStatusLookup(err, user) {
-    console.log("hanlde status lookup");
+    // console.log("hanlde status lookup");
     if (err || !user) {
       if (err) {
         twiml.message("An unexpected error occurred! Please try again.");

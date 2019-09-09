@@ -43,14 +43,14 @@ router.post('/', function(req, res, next) {
 
   function findDefendant() {
     if (body.indexOf(' ') === -1) {
-      console.log("no phone");
+      // console.log("no phone");
       twiml.message("Please include a phone number to duel!");
       res.writeHead(200, {'Content-Type': 'text/xml'});
       res.end(twiml.toString());
     } else {
       number = body.slice(body.indexOf(' ') + 1, body.length);
       number = phone(number)[0];
-      console.log(number);
+
       /* if (number === req.body.From) {
         twiml.message("You cannot duel yourself!");
         res.writeHead(200, {'Content-Type': 'text/xml'});
@@ -70,7 +70,7 @@ router.post('/', function(req, res, next) {
       defendant = user;
       Duel.find({ $and: [ { users: { $all: [user._id, challenger]} }, { state: {$in: [ 'drawn', 'shot', 'pending', 'accepted']} } ]}, handleActiveDuelCheck );
     } else {
-      console.log("else - no user found");
+      // console.log("else - no user found");
       user = new User();
       user.number = number;
       user.save(handleDefendantSave);
@@ -90,12 +90,12 @@ router.post('/', function(req, res, next) {
 
   function handleActiveDuelCheck(err, duels) {
     if (err) {
-      console.log(err);
+      // console.log(err);
       twiml.message("An unexpected error occurred! Please try again.");
       res.writeHead(200, {'Content-Type': 'text/xml'});
       res.end(twiml.toString());
     } else if (duels !== undefined && duels.length > 0) {
-      console.log(duels);
+      // console.log(duels);
       twiml.message("There is already a pending or active duel between you two!");
       res.writeHead(200, {'Content-Type': 'text/xml'});
       res.end(twiml.toString());
@@ -115,9 +115,9 @@ router.post('/', function(req, res, next) {
   }
 
   function handleNewDuelSave(err, duel) {
-    console.log("handling duel save");
+    // console.log("handling duel save");
     if (err || !duel) {
-      console.log("error in duel save");
+      // console.log("error in duel save");
       twiml.message("An unexpected error occurred! Please try again.");
       res.writeHead(200, {'Content-Type': 'text/xml'});
       res.end(twiml.toString());
