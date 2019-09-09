@@ -28,4 +28,4 @@ BANG! Is a two-player, SMS-based text game. To begin, text a command to +1 (830)
 * BANG! apps for everything - iMessage, WhatsApp, FB Messenger, Twitter, and more!
 
 ## Support
-* Help cover BANG!'s server costs by Vennmo'ing @TimoFrancis :)
+* Help cover BANG!'s server costs: https://www.buymeacoffee.com/iqYoJlB :)
