@@ -54,7 +54,7 @@ router.post('/', function(req, res, next) {
             // console.log(err);
           } else {
             client.messages.create({
-              body: "The DUEL is on! At some point in the next hour, you will receive a message telling you to DRAW. The first to repond with BANG will be the winner!",
+              body: "The DUEL is on! At some point in the next hour, you will receive a message telling you to DRAW. The first to repond with BANG wins!",
               to: user.number,  // Text this number
               from: '+18304444565' // From a valid Twilio number
             })
