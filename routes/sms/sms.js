@@ -33,7 +33,7 @@ router.post('/', function(req, res, next) {
       statusRouter.handle(req, res, next);
       // User.findOne({ number: req.body.From }, handleStatusLookup)
     } else if (command === "COMMANDS") {
-      twiml.message("Commands:\n\'ACCEPT\' to accept a duel\n\'BANG\' to fire\n\'COMMANDS\' to see commands\n\'DUEL [phone number]\' to start a duel\n\'HISTORY\' to see your all-time record\n\'RULES\' to see the game rules\n\'STATUS\' to view your current duels.");
+      twiml.message("Commands:\n\'ACCEPT\' to accept a duel\n\'BANG\' to fire\n\'COMMANDS\' to see commands\n\'DUEL [phone number]\' to start a duel\n\'HISTORY\' to see your all-time record\n\'RULES\' to see the game rules\n\'STATUS\' to view your current duels");
       res.writeHead(200, {'Content-Type': 'text/xml'});
       res.end(twiml.toString());
     } else if (command === 'DUEL') {
