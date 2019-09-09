@@ -25,7 +25,7 @@ router.post('/', function(req, res, next) {
     command = command.toUpperCase();
 
     if (command === "RULES") {
-      twiml.message('Welcome to BANG! BANG is a two-player game: One player will challenge the other to a duel; once that player accepts, the duel begins. At a random time after the duel begins, both players will be instructed to draw their weapons and shoot. The first to respond with \'BANG\' is the winner!');
+      twiml.message('Welcome to BANG! BANG is a 2-player game: One player will challenge another to a duel; once that player accepts, the duel begins. At a random time within the next hour, both players will be instructed to DRAW their weapons. The first to respond with \'BANG\' wins!');
       res.writeHead(200, {'Content-Type': 'text/xml'});
       res.end(twiml.toString());
     } else if (command === "STATUS") {
@@ -33,7 +33,7 @@ router.post('/', function(req, res, next) {
       statusRouter.handle(req, res, next);
       // User.findOne({ number: req.body.From }, handleStatusLookup)
     } else if (command === "COMMANDS") {
-      twiml.message("Commands:\n\'ACCEPT\' to accept a duel challenge.\n\'BANG\' to fire once you're in a duel.\n\'COMMANDS\' to see commands.\n\'DUEL [phone number]\' to start a duel.\n\'HISTORY\' to see your performance in completed duels.\n\'RULES\' to see an overview of the game.\n\'STATUS\' to view your current pending and active duels.");
+      twiml.message("Commands:\n\'ACCEPT\' to accept a duel\n\'BANG\' to fire\n\'COMMANDS\' to see commands\n\'DUEL [phone number]\' to start a duel\n\'HISTORY\' to see your all-time record\n\'RULES\' to see the game rules\n\'STATUS\' to view your current duels.");
       res.writeHead(200, {'Content-Type': 'text/xml'});
       res.end(twiml.toString());
     } else if (command === 'DUEL') {

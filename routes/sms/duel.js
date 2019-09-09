@@ -51,13 +51,13 @@ router.post('/', function(req, res, next) {
       number = body.slice(body.indexOf(' ') + 1, body.length);
       number = phone(number)[0];
 
-      /* if (number === req.body.From) {
+      if (number === req.body.From) {
         twiml.message("You cannot duel yourself!");
         res.writeHead(200, {'Content-Type': 'text/xml'});
         res.end(twiml.toString());
-      } else { */
+      } else {
         User.findOne({ number: number }, handleDefendantLookup);
-      // }
+      }
     }
   }
 
